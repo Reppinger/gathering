@@ -1,9 +1,10 @@
 When(/^I add a project named "([^"]*)" with the following tasks:$/) do |project_name, tasks|
   visit(CreateProjectPage) do |page|
     page.name = project_name
-    tasks.symbolic_hashes.each do |task|
+    tasks.hashes.each do |task|
       page.add_task task[:name], task[:velocity]
     end
+    page.create_project
   end
 end
 
