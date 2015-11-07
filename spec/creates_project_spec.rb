@@ -1,8 +1,6 @@
-require 'rails_helper'
-
 describe CreatesProject do
 
-  it 'should creates a project given a name' do
+  it 'creates a project with a given name' do
     creator = CreatesProject.new(name: "Project Runway")
     creator.build
     expect(creator.project.name).to eq("Project Runway")
@@ -14,29 +12,28 @@ describe CreatesProject do
     expect(creator.project.tasks.size).to eq(2)
   end
 
-  describe 'task string parsing' do
+  describe 'converts the given string to tasks' do
 
-    it 'handles an empty string' do
+    it 'when it is empty' do
       creator = CreatesProject.new(name: 'Test', task_string: '')
       tasks = creator.convert_string_to_tasks
       expect(tasks.size).to eq(0)
     end
 
-    context 'with a single task string' do
+    context 'when the string contains a single task' do
+      let(:creator) { CreatesProject.new(name: 'Test', task_string: 'Start things') }
+
       it 'creates a task' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things')
         tasks = creator.convert_string_to_tasks
         expect(tasks.size).to eq(1)
       end
 
       it 'assigns task title' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things')
         tasks = creator.convert_string_to_tasks
         expect(tasks.map(&:title)).to eq(['Start things'])
       end
 
       it 'defaults a task size to 1' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things')
         tasks = creator.convert_string_to_tasks
         expect(tasks.map(&:size)).to eq([1])
       end
@@ -48,15 +45,15 @@ describe CreatesProject do
       end
     end
 
-    context 'with a multiple tasks in string' do
+    context 'when the string contains multiple tasks' do
+      let(:creator) { CreatesProject.new(name: 'Test', task_string: 'Start things\nEnd things') }
+
       it 'creates expected number of tasks' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things\nEnd things')
         tasks = creator.convert_string_to_tasks
         expect(tasks.size).to eq(2)
       end
 
       it 'assigns task title for each task' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things\nEnd things')
         tasks = creator.convert_string_to_tasks
         expect(tasks.map(&:title)).to eq(['Start things', 'End things'])
       end
