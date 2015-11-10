@@ -8,7 +8,7 @@ class CreateProjectPage
   button(:create_project, name: 'commit')
 
   def add_task(name, size)
-    self.tasks += "#{name} #{size}\n"
+    self.tasks += "#{name}:#{size}\n"
   end
 
 end

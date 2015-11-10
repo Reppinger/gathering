@@ -1,7 +1,10 @@
 class ProjectsPage
   include PageObject
 
-  td(:project_name, id: 'project_name')
-  td(:total_size, id: 'total_size')
+  table(:projects, id: 'projects')
 
+
+  def first_project
+    projects_element[1].text
+  end
 end
