@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def index
+    @projects = Project.all
+  end
+
   def create
     @action = CreatesProject.new(
         name: params[:project][:name],
