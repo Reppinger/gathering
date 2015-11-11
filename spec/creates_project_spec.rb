@@ -7,7 +7,7 @@ describe CreatesProject do
   end
 
   it 'attaches tasks to the project' do
-    creator = CreatesProject.new(name: 'Test', task_string: 'Start things:3\nEnd things:7')
+    creator = CreatesProject.new(name: 'Test', task_string: "Start things:3\nEnd things:7")
     creator.create
     expect(creator.project.tasks.size).to eq(2)
   end
@@ -15,13 +15,13 @@ describe CreatesProject do
   describe 'converts the given string to tasks' do
 
     it 'when it is empty' do
-      creator = CreatesProject.new(name: 'Test', task_string: '')
+      creator = CreatesProject.new(name: 'Test', task_string: "")
       tasks = creator.convert_string_to_tasks
       expect(tasks.size).to eq(0)
     end
 
     context 'when the string contains a single task' do
-      let(:creator) { CreatesProject.new(name: 'Test', task_string: 'Start things') }
+      let(:creator) { CreatesProject.new(name: 'Test', task_string: "Start things") }
 
       it 'creates a task' do
         tasks = creator.convert_string_to_tasks
@@ -39,14 +39,14 @@ describe CreatesProject do
       end
 
       it 'parses out the provided size' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things:3')
+        creator = CreatesProject.new(name: 'Test', task_string: "Start things:3")
         tasks = creator.convert_string_to_tasks
         expect(tasks.map(&:size)).to eq([3])
       end
     end
 
     context 'when the string contains multiple tasks' do
-      let(:creator) { CreatesProject.new(name: 'Test', task_string: 'Start things\nEnd things') }
+      let(:creator) { CreatesProject.new(name: 'Test', task_string: "Start things\nEnd things") }
 
       it 'creates expected number of tasks' do
         tasks = creator.convert_string_to_tasks
@@ -59,7 +59,7 @@ describe CreatesProject do
       end
 
       it 'parses out the provided sizes' do
-        creator = CreatesProject.new(name: 'Test', task_string: 'Start things:3\nEnd things:7')
+        creator = CreatesProject.new(name: 'Test', task_string: "Start things:3\nEnd things:7")
         tasks = creator.convert_string_to_tasks
         expect(tasks.map(&:size)).to eq([3,7])
       end

@@ -16,7 +16,7 @@ class CreatesProject
 
   def convert_string_to_tasks
     tasks = []
-    task_string.split('\n').each do |one_task|
+    task_string.split("\n").each do |one_task|
       tasks << build_task(one_task)
     end
     tasks
