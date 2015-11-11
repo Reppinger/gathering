@@ -10,7 +10,6 @@ end
 
 Then(/^"([^"]*)" is created with a total size of (\d+)$/) do |expected_project_name, total_size|
   visit(ProjectsPage) do |page|
-    expect(page.first_project).to include(expected_project_name)
-    expect(page.first_project).to include(total_size)
+    expect(page).to have_project_displayed(expected_project_name, total_size)
   end
 end
