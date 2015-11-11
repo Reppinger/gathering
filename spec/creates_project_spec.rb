@@ -12,6 +12,13 @@ describe CreatesProject do
     expect(creator.project.tasks.size).to eq(2)
   end
 
+  xit "doesn't allow the creation of a task with and invalid size" do
+    creator = CreatesProject.new(name: "Test", task_string: "task_with_invalid_size:invalid_size")
+    creator.create
+    # This doesn't feel right to me. Not in agreement on this validating the record wasn't saved
+    # expect(creator.project.tasks.first.title).to eq("task_with_invalid_size")
+  end
+
   describe 'converts the given string to tasks' do
 
     it 'when it is empty' do
@@ -61,7 +68,7 @@ describe CreatesProject do
       it 'parses out the provided sizes' do
         creator = CreatesProject.new(name: 'Test', task_string: "Start things:3\nEnd things:7")
         tasks = creator.convert_string_to_tasks
-        expect(tasks.map(&:size)).to eq([3,7])
+        expect(tasks.map(&:size)).to eq([3, 7])
       end
     end
 
