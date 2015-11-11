@@ -8,8 +8,8 @@ When(/^I add a project named "([^"]*)" with the following tasks:$/) do |project_
   end
 end
 
-Then(/^"([^"]*)" is created with a total size of (\d+)$/) do |expected_project_name, total_size|
+Then(/^"([^"]*)" is created with a total size of (\d+)$/) do |project_name, total_size|
   visit(ProjectsPage) do |page|
-    expect(page).to have_project_displayed(expected_project_name, total_size)
+    expect(page).to have_project_displayed(project_name, total_size)
   end
 end
