@@ -15,7 +15,7 @@ describe CreatesProject do
   xit "doesn't allow the creation of a task with and invalid size" do
     creator = CreatesProject.new(name: "Test", task_string: "task_with_invalid_size:invalid_size")
     creator.create
-    # This doesn't feel right to me. Not in agreement on this validating the record wasn't saved
+    # This doesn't feel right to me. Not in agreement on this validating the record wasn't created
     # expect(creator.project.tasks.first.title).to eq("task_with_invalid_size")
   end
 
